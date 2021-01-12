@@ -71,6 +71,16 @@ namespace ParallellitzarProcessos
         {
             char lletra_dni = ' ';
 
+            int posicio_lletra = -1;
+
+            if (int.TryParse(dni.Substring(0, 8), out posicio_lletra))
+            {
+                char[] lletres = "TRWAGMYFPDXBNJZSQVHLCKE".ToCharArray();
+
+                lletra_dni = lletres[posicio_lletra % 23];
+            }
+
+            return lletra_dni;
         }
     }
 }
