@@ -37,6 +37,10 @@ namespace ParallellitzarProcessos
             this.txtPar = new System.Windows.Forms.Label();
             this.progressSeq = new System.Windows.Forms.ProgressBar();
             this.progressPar = new System.Windows.Forms.ProgressBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.progressInvoke = new System.Windows.Forms.ProgressBar();
+            this.txtInvoke = new System.Windows.Forms.Label();
+            this.btnInvoke = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleSequential
@@ -111,11 +115,51 @@ namespace ParallellitzarProcessos
             this.progressPar.Size = new System.Drawing.Size(418, 23);
             this.progressPar.TabIndex = 7;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 232);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(352, 39);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Comprovació Invoke";
+            // 
+            // progressInvoke
+            // 
+            this.progressInvoke.Location = new System.Drawing.Point(19, 303);
+            this.progressInvoke.Name = "progressInvoke";
+            this.progressInvoke.Size = new System.Drawing.Size(418, 23);
+            this.progressInvoke.TabIndex = 11;
+            // 
+            // txtInvoke
+            // 
+            this.txtInvoke.AutoSize = true;
+            this.txtInvoke.Location = new System.Drawing.Point(100, 279);
+            this.txtInvoke.Name = "txtInvoke";
+            this.txtInvoke.Size = new System.Drawing.Size(42, 13);
+            this.txtInvoke.TabIndex = 10;
+            this.txtInvoke.Text = "Temps:";
+            // 
+            // btnInvoke
+            // 
+            this.btnInvoke.Location = new System.Drawing.Point(19, 274);
+            this.btnInvoke.Name = "btnInvoke";
+            this.btnInvoke.Size = new System.Drawing.Size(75, 23);
+            this.btnInvoke.TabIndex = 9;
+            this.btnInvoke.Text = "Comprovar";
+            this.btnInvoke.UseVisualStyleBackColor = true;
+            this.btnInvoke.Click += new System.EventHandler(this.btnInvoke_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.progressInvoke);
+            this.Controls.Add(this.txtInvoke);
+            this.Controls.Add(this.btnInvoke);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.progressPar);
             this.Controls.Add(this.progressSeq);
             this.Controls.Add(this.txtPar);
@@ -141,5 +185,9 @@ namespace ParallellitzarProcessos
         private System.Windows.Forms.Label txtPar;
         private System.Windows.Forms.ProgressBar progressSeq;
         private System.Windows.Forms.ProgressBar progressPar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ProgressBar progressInvoke;
+        private System.Windows.Forms.Label txtInvoke;
+        private System.Windows.Forms.Button btnInvoke;
     }
 }

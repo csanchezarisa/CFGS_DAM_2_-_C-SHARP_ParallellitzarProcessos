@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
@@ -22,22 +16,27 @@ namespace ParallellitzarProcessos
         /** Fa la comprovació de manera seqüencial i mostra el temps trigat */
         private void btnSeq_Click(object sender, EventArgs e)
         {
-
+            // Reseteja la barra de progrés
             progressSeq.Maximum = Program.personas.Length;
-            int index = 0;
+            progressSeq.Value = 0;
+
+            // Crea un cronòmetre
             Stopwatch clock = new Stopwatch();
             clock.Start();
 
+            // Bucla fent les funcions pertinents de manera seqüencial
             foreach (Persona persona in Program.personas)
             {
 
                 persona.comprova_dni();
                 persona.comprova_mail();
                 persona.comprova_nom();
-                index++;
-                progressSeq.Value = index;
             }
 
+            // Mostra la barra de progrés finalitzada
+            progressSeq.Value = Program.personas.Length;
+
+            // Para el cronòmetre i mostra el temps per pantalla
             clock.Stop();
             long time_lapse = clock.ElapsedMilliseconds;
             txtSeq.Text = "Temps: " + time_lapse + "ms";
@@ -47,30 +46,76 @@ namespace ParallellitzarProcessos
         /** Fa la comprovació de manera paral·lela i mostra el temps trigat */
         private void btnPar_Click(object sender, EventArgs e)
         {
-
+            // Reseteja la barra de progrés
             progressPar.Maximum = Program.personas.Length;
+            progressPar.Value = 0;
+
+            // Crea un cronòmetre
             Stopwatch clock = new Stopwatch();
             clock.Start();
 
-            Parallel.Invoke(comprovarPersonaPar);
+            // Bucla fent les funcions pertinents de manera seqüencial
+            Parallel.ForEach(Program.personas, persona =>
+            {
+                persona.comprova_dni();
+                persona.comprova_mail();
+                persona.comprova_nom();
+            });
 
+            // Mostra la barra de progrés finalitzada
+            progressPar.Value = Program.personas.Length;
+
+            // Para el cronòmetre i mostra el temps per pantalla
             clock.Stop();
             long time_lapse = clock.ElapsedMilliseconds;
             txtPar.Text = "Temps: " + time_lapse + "ms";
 
         }
 
-        private void comprovarPersonaPar()
+        /** Fa la comprovació de manera paral·lela amb el mètode Invoke i mostra el temps trigat */
+        private void btnInvoke_Click(object sender, EventArgs e)
         {
-            int index = 0;
-            foreach (Persona persona in Program.personas)
+            // Reseteja la barra de progrés
+            progressInvoke.Maximum = Program.personas.Length;
+            progressInvoke.Value = 0;
+
+            // Crea un cronòmetre
+            Stopwatch clock = new Stopwatch();
+            clock.Start();
+
+            // Bucla fent les funcions pertinents de manera seqüencial
+            Parallel.Invoke(
+            () => 
             {
-                persona.comprova_dni();
-                persona.comprova_mail();
-                persona.comprova_nom();
-                index++;
-                progressPar.Value = index;
-            }
+                foreach (Persona persona in Program.personas)
+                {
+                    persona.comprova_dni();
+                }
+            },
+            
+            () =>
+            {
+                foreach (Persona persona in Program.personas)
+                {
+                    persona.comprova_mail();
+                }
+            },
+            
+            () =>
+            {
+                foreach (Persona persona in Program.personas)
+                {
+                    persona.comprova_nom();
+                }
+            });
+
+            // Mostra la barra de progrés finalitzada
+            progressInvoke.Value = Program.personas.Length;
+
+            // Para el cronòmetre i mostra el temps per pantalla
+            clock.Stop();
+            long time_lapse = clock.ElapsedMilliseconds;
+            txtInvoke.Text = "Temps: " + time_lapse + "ms";
         }
     }
 }
