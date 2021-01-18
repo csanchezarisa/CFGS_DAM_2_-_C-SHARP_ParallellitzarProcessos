@@ -18,8 +18,12 @@ namespace ParallellitzarProcessos
             // Formulari per obrir el fitxer
             Application.Run(new Form1());
 
-            // Formulari per fer els càlculs
-            Application.Run(new Form2());
+            // Comprova si l'array ha estat inicialitzat
+            if (personas != null)
+            {
+                // Formulari per fer els càlculs
+                Application.Run(new Form2());
+            }
 
         }
     }
