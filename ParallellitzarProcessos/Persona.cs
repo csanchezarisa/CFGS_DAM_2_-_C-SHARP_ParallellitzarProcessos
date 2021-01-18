@@ -39,7 +39,8 @@ namespace ParallellitzarProcessos
             int first_index = this.email.IndexOf('@');
             int last_index = this.email.LastIndexOf('@');
 
-            if (first_index != last_index || 
+            if (first_index == -1 ||
+                first_index != last_index || 
                 first_index == 0 || 
                 last_index == 0 ||
                 first_index == (this.email.Length - 1) ||
